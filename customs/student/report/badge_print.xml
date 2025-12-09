@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Template -->
+    <template id="report_student_badge">
+        <t t-call="web.layout">
+            <main>
+                <t t-foreach="docs" t-as="student">
+                    
+                    <div class="page" style="width: 210mm; height: 297mm; page-break-after: always;">
+                        <div style="text-align: center; margin-top: 50px;">
+                            <h1>የተማሪ መታወቂያ</h1>
+                            <img t-if="student.photo" t-att-src="'data:image/png;base64,%s' % student.photo.decode('utf-8')"
+                                 style="width: 100px; height: 100px; border-radius: 50%;"/>
+                            <h2 t-field="student.full_name"/>
+                            <p><strong>መታወቂያ ቁጥር:</strong> <span t-field="student.id_number"/></p>
+                            <p><strong>እድሜ:</strong> <span t-field="student.age"/></p>
+                            <p><strong>የክርስትና ስም:</strong> <span t-field="student.name_of_baptism"/></p>
+                            <p><strong>ወላጆች:</strong> <span t-field="student.parents_phone"/></p>
+                        </div>
+                  
+
+                    <!-- Page 2 -->
+                    <div  style="width: 210mm; height: 297mm;">
+                        <div style="text-align: center; margin-top: 50px;">
+                            <h1>QR Code</h1>
+                            <img t-if="student.qr_code" t-att-src="'data:image/png;base64,%s' % student.qr_code.decode('utf-8')"
+                                 style="width: 200px; height: 200px;"/>
+                            <p>የተማሪ መታወቂያ ቁጥር: <span t-field="student.id_number"/></p>
+                        </div>
+                    </div>
+                      </div>
+                </t>
+            </main>
+        </t>
+    </template>
+
+    <record id="action_report_student_badge" model="ir.actions.report">
+        <field name="name">Student Badge</field>
+        <field name="model">student.student</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">student.report_student_badge</field>
+        <field name="report_file">student.report_student_badge</field>
+        <field name="print_report_name">'%s' % object.full_name</field>
+        <field name="binding_model_id" ref="model_student_student"/>
+    </record>
+</odoo>

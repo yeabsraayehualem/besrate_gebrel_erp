@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="attendance_menu"
+        name="Attendance"
+        sequence="20"/>
+    
+    <menuitem id="student_attendance_menu"
+    name="Student Attendance"
+    parent="attendance_menu"
+    sequence="10"/>
+
+    <menuitem id="class_attendance_menu"
+    name="Class Attendance"
+    parent="student_attendance_menu"
+    action="class_attendance_action"
+    sequence="10"/>
+
+    <menuitem id="feast_attendance_menu"
+    name="Holy Feast Attendance"
+    parent="student_attendance_menu"
+    action="feast_attendance_action"
+    sequence="20"/>
+
+</odoo>

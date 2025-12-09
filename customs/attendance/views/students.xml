@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="student_attendance_inherit_attendance" model="ir.ui.view">
+        <field name="name">student.student.view.form.inherit</field>
+        <field name="model">student.student</field>
+        <field name="inherit_id" ref="student.view_sunday_student_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+            <div name="button_box" class="oe_button_box">
+                <button name="action_class_attendance" type="object" class="oe_stat_button" icon="fa-calendar">
+                    <field name="total_attendance" widget="statinfo" string="Class Attendance"/>
+                </button>
+                <button name="action_feast_attendance" type="object" class="oe_stat_button" icon="fa-star">
+                    <field name="feats_attendance" widget="statinfo" string="Feast Attendance"/>
+                </button>
+            </div>
+                
+            </xpath>
+    
+            <xpath expr="//notebook" position="inside">
+                <page name="attendance" string="Attendance">
+                    <field name="class_attendance">
+                    <list editable="top">
+                        <field name="attendance_date"/>
+                        <field name="attendance_state"/>
+                    </list>
+
+                    </field>
+                </page>
+                <page name="feast_attendance" string="Feast Attendance">
+                    <field name="holy_feasts_attendance">
+                    <list editable="top">
+                        <field name="attendance_date"/>
+                        <field name="attendance_state"/>
+                    </list>
+
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

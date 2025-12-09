@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="student_student_id_number" model="ir.sequence">
+        <field name="name">Student ID Number</field>
+        <field name="code">student.student.id_number</field>
+        <field name="prefix">ተማሪ/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="number_increment">1</field>
+        <field name="implementation">standard</field>  <!-- or 'no_gap' if you want no gaps -->
+    </record>
+
+</odoo>

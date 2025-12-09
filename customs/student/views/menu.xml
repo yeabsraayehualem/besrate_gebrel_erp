@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+<menuitem
+    id="students_base_menu"
+    name="Students Management"
+    sequence="10"/>
+    
+<menuitem
+    id="user_mngt_menu"
+    name="Students &amp; Parents"
+    parent='students_base_menu'
+    sequence="10"/>
+
+<menuitem
+    id="students_list_menu"
+    name="Students"
+    parent="user_mngt_menu"
+    action="student_student_action"
+    sequence="10"/>
+
+<menuitem id="parents_list_menu"
+name="Parents" parent="user_mngt_menu" action="student_parent_action" sequence="20"/>
+
+<menuitem
+    id="students_config_menu"
+    name="Configurations"
+    parent="students_base_menu"
+    sequence="90"/>
+    <menuitem
+        id="stages_menu"
+        name="Stages"
+        parent="students_config_menu"
+        action="class_stages_action"
+        sequence="10"/>
+    <menuitem
+        id="courses_menu"
+        name="Courses"
+        parent="students_config_menu"
+        action="class_course_action"
+        sequence="20"/>
+ 
+
+</odoo>

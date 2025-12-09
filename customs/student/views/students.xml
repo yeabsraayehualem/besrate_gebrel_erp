@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FORM VIEW -->
+    <record id="view_sunday_student_form" model="ir.ui.view">
+        <field name="name">student.student.form</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <form string="Student">
+                <sheet>
+                    <!-- Header: Full Name + Photo (Odoo-native layout) -->
+                    <div class="oe_title">
+                        <h1>
+
+                            <field name="full_name" placeholder="Full Name" required="1"/>
+                        </h1>
+                        <h4 class="oe_sub_title">
+                            <field name="id_number"/>
+                        </h4>
+                         <field name="photo" widget="image" class="oe_avatar float-end" 
+                           options="{'zoom': true, 'preview_image': 'photo', 'size': [150, 150]}"/>
+                    </div>
+                    <!-- Photo on the right -->
+                   
+                    <!-- Main fields -->
+                    <group>
+                        <group>
+                            <field name="age" required="1"/>
+                            <field name="name_of_baptism" required="1"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="parents" widget="many2many_tags"/>
+                            <field name="parents_phone" readonly="1"/>
+                            <field name="date_registered" readonly="1"/>
+                            <field name="stage_id"/>
+                        </group>
+
+                        <group>
+                <field name="qr_code" widget="image"  class="oe_avatar m-0" option="{'zoom': true, 'preview_image': 'qr_code', 'size': [150, 150]}"/>
+
+                        </group>
+                    </group>
+                     <notebook>
+                </notebook>
+                </sheet>
+               
+            </form>
+        </field>
+    </record>
+
+    <!-- LIST VIEW (Using <list> tag for Odoo 18) -->
+    <record id="view_student_list" model="ir.ui.view">
+        <field name="name">student.student.list</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <list string="Students">
+                                        <field name="id_number"/>
+
+                <field name="full_name"/>
+                <field name="age"/>
+                <field name="name_of_baptism"/>
+                <field name="phone"/>
+                <field name="parents_phone"/>
+                <field name="date_registered"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="student_student_action" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">student.student</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first student!
+            </p>
+        </field>
+    </record>
+
+  
+</odoo>
