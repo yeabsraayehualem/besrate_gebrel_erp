@@ -11,6 +11,7 @@ class Student(models.Model):
     full_name = fields.Char(string="Full Name", required=True)
     age = fields.Char(string="Age", required=True)
     name_of_baptism = fields.Char(string="Name of Baptism", required=True)
+    gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender")
     parents = fields.Many2many('student.parent', string="Parent")
     phone = fields.Char(string="Phone")
     parents_phone = fields.Char(string="Parents Phone", compute="_compute_parents_phone")
@@ -49,3 +50,12 @@ class Student(models.Model):
                 record.qr_code = base64.b64encode(buffer.getvalue())
             else:
                 record.qr_code = False
+
+    def action_generate_id_badge_pdf(self):
+        """Open a URL that will generate and download the badge PDF."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/hr/badge/pdf/{self.id}',
+            'target': 'self',
+        }

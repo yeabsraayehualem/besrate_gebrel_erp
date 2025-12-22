@@ -6,7 +6,7 @@
     "description": "Students Base",
     "author":"Yoraki",
     "contact":"0961386082",
-    "depends": ["base"],
+    "depends": ["base",'hr'],
     "data": [
         "security/ir.model.access.csv",
         "data/student_sequence.xml",

@@ -9,7 +9,7 @@ class Stages(models.Model):
     name=fields.Char(string="Name",required=True)
     courses = fields.One2many("class.course","stage_id")
     courses_number = fields.Integer(string="Courses Number",compute="_compute_courses_numeber")
-    
+    supervisor = fields.Many2one("hr.employee", string="Supervisor")
     @api.depends('courses')
     def _compute_courses_numeber(self):
         for record in self:

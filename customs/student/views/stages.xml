@@ -8,6 +8,7 @@
     <field name="arch" type="xml">
         <list string="Stages" editable="top">
                 <field name="name"/>
+            <field name="supervisor" />
                 <field name="courses_number"/>
         </list>
     </field>

@@ -6,6 +6,15 @@
         <field name="model">student.student</field>
         <field name="arch" type="xml">
             <form string="Student">
+                <headers>
+                      <button
+                name="action_generate_id_badge_pdf"
+                type="object"
+                string="Generate ID Badge (PDF)"
+                class="oe_highlight"
+
+            />
+                </headers>
                 <sheet>
                     <!-- Header: Full Name + Photo (Odoo-native layout) -->
                     <div class="oe_title">
@@ -25,6 +34,7 @@
                     <group>
                         <group>
                             <field name="age" required="1"/>
+                            <field name="gender" required="1" />
                             <field name="name_of_baptism" required="1"/>
                             <field name="phone"/>
                         </group>

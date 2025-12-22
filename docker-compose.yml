@@ -20,6 +20,7 @@ services:
     container_name: deb_besrat_web
     depends_on:
       - postgres
+      - flask_bg
     ports:
       - "1900:8069"
       - "1019:8072"
@@ -38,7 +39,16 @@ services:
       - odoo-network
     user: "root:root"
     # install ibus ibus-m17n m17n-db
-    command: [ "/bin/sh", "-c", "apt-get update && apt-get install -y ibus ibus-m17n m17n-db && /usr/bin/odoo --config=/etc/odoo/odoo.conf" ]
+    command: [ "/bin/sh", "-c", "/usr/bin/odoo --config=/etc/odoo/odoo.conf" ]
+
+  flask_bg:
+    build: ./flask_badge
+    container_name: flask_bg
+    ports:
+      - "5002:5002"
+    networks:
+      - odoo-network
+
 
 volumes:
   odoo-web-data:
