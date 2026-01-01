@@ -1,1 +1,1 @@
-docker compose logs -f odoo
+docker-compose logs -f odoo

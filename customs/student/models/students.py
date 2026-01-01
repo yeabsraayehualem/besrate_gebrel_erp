@@ -21,10 +21,13 @@ class Student(models.Model):
     qr_code = fields.Binary(string="QR Code", compute="_compute_qr_code")
     stage_id = fields.Many2one("class.stage",string="Stage")
 
-
-    def create(self,vals):
-        vals['id_number']=self.env['ir.sequence'].next_by_code('student.student.id_number')
-        return super(Student,self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Generate a unique ID number for each record
+        for vals in vals_list:
+            if 'id_number' not in vals or not vals['id_number']:
+                vals['id_number'] = self.env['ir.sequence'].next_by_code('student.student.id_number')
+        return super().create(vals_list)
 
     @api.depends('parents')
     def _compute_parents_phone(self):
