@@ -11,7 +11,7 @@ class Student(models.Model):
     full_name = fields.Char(string="Full Name", required=True)
     age = fields.Char(string="Age", required=True)
     name_of_baptism = fields.Char(string="Name of Baptism", required=True)
-    gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender")
+    gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender",default="male")
     parents = fields.Many2many('student.parent', string="Parent")
     phone = fields.Char(string="Phone")
     parents_phone = fields.Char(string="Parents Phone", compute="_compute_parents_phone")
@@ -32,8 +32,13 @@ class Student(models.Model):
     @api.depends('parents')
     def _compute_parents_phone(self):
         for record in self:
-            phones = [p.phone_no for p in record.parents if p.phone_no]
-            record.parents_phone = " / ".join(phones) if phones else ""
+            if record.parents:
+                phones = [p.phone_no for p in record.parents if p.phone_no]
+                record.parents_phone = " / ".join(phones) if phones else ""
+            elif record.phone:
+                record.parents_phone = record.phone
+            else:
+                record.parents_phone = ""
 
     @api.depends("id_number")
     def _compute_qr_code(self):

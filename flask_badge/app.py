@@ -40,7 +40,10 @@ def generate_badge_pdf():
             "ጴጥሮስ": "petros",
             "ጳውሎስ": "pawlos"
             }
-
+            gender = {
+                "male": "ወንድ",
+                "female": "ሴት"
+            }
             with open(STATIC_DIR / f"{bg[data['stage']]}.png", "rb") as f:
                 ID_FRONT_B64 = base64.b64encode(f.read()).decode('utf-8')
 
@@ -49,13 +52,17 @@ def generate_badge_pdf():
             ID_FRONT_B64 = ""
             LOGO_B64 = ""
         # Render template with ALL data as base64
+
+        static_avatar = STATIC_DIR / "image.png"
+        with open(static_avatar, "rb") as f:
+            AVATAR_B64 = base64.b64encode(f.read()).decode('utf-8')
         html_content = render_template(
             'index.html',
-            avatar_b64=data.get('avatar_b64', ''),
+            avatar_b64=data.get('avatar_b64') if data.get('avatar_b64') != '' else AVATAR_B64,
             qr_base64=data.get('qr_code', ''),
             fullname=data['fullname'],
             age=data['age'],
-            gender=data['gender'],
+            gender=gender[data['gender']],
             parents_phone=data['parents_phone'],
             supervisor_phone=data['supervisor_phone'],
             badge_bg_b64=ID_FRONT_B64
