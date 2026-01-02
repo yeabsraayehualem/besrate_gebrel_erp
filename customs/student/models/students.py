@@ -20,6 +20,7 @@ class Student(models.Model):
     id_number = fields.Char(string="ID Number")
     qr_code = fields.Binary(string="QR Code", compute="_compute_qr_code")
     stage_id = fields.Many2one("class.stage",string="Stage")
+    group_type = fields.Many2one('class.group', string="Group Type",)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -67,3 +68,11 @@ class Student(models.Model):
             'url': f'/hr/badge/pdf/{self.id}',
             'target': 'self',
         }
+
+
+class GroupClass(models.Model):
+    _name = "class.group"
+    _description = "Group"
+    _rec_name = "name"
+
+    name = fields.Char(string="Name", required=True)

@@ -43,6 +43,7 @@
                             <field name="parents_phone" readonly="1"/>
                             <field name="date_registered" readonly="1"/>
                             <field name="stage_id"/>
+                            <field name="group_type"/>
                         </group>
 
                         <group>
@@ -64,7 +65,7 @@
         <field name="model">student.student</field>
         <field name="arch" type="xml">
             <list string="Students">
-                                        <field name="id_number"/>
+                <field name="id_number"/>
 
                 <field name="full_name"/>
                 <field name="age"/>
